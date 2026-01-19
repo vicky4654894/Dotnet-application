@@ -1,0 +1,5 @@
+/Users/vickykumar/Desktop/Dotnet_Application/Application-1.DataAccess/obj/Debug/net10.0/Application-1.DataAccess.csproj.AssemblyReference.cache
+/Users/vickykumar/Desktop/Dotnet_Application/Application-1.DataAccess/obj/Debug/net10.0/Application-1.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+/Users/vickykumar/Desktop/Dotnet_Application/Application-1.DataAccess/obj/Debug/net10.0/Application-1.DataAccess.AssemblyInfoInputs.cache
+/Users/vickykumar/Desktop/Dotnet_Application/Application-1.DataAccess/obj/Debug/net10.0/Application-1.DataAccess.AssemblyInfo.cs
+/Users/vickykumar/Desktop/Dotnet_Application/Application-1.DataAccess/obj/Debug/net10.0/Application-1.DataAccess.csproj.CoreCompileInputs.cache

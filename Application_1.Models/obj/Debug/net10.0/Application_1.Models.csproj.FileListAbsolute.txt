@@ -1,0 +1,11 @@
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.Models/bin/Debug/net10.0/Application_1.Models.deps.json
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.Models/bin/Debug/net10.0/Application_1.Models.dll
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.Models/bin/Debug/net10.0/Application_1.Models.pdb
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.Models/obj/Debug/net10.0/Application_1.Models.GeneratedMSBuildEditorConfig.editorconfig
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.Models/obj/Debug/net10.0/Application_1.Models.AssemblyInfoInputs.cache
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.Models/obj/Debug/net10.0/Application_1.Models.AssemblyInfo.cs
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.Models/obj/Debug/net10.0/Application_1.Models.csproj.CoreCompileInputs.cache
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.Models/obj/Debug/net10.0/Application_1.Models.dll
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.Models/obj/Debug/net10.0/refint/Application_1.Models.dll
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.Models/obj/Debug/net10.0/Application_1.Models.pdb
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.Models/obj/Debug/net10.0/ref/Application_1.Models.dll

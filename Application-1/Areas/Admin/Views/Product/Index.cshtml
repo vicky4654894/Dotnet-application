@@ -1,0 +1,113 @@
+@{
+    ViewData["Title"] = "Product Page";
+}
+
+@model ProductViewModel
+<div class="container mt-3">
+    <partial name="_Notification"/>
+  <div class="product-header d-flex justify-content-between">
+        <h3 class="">Product List</h3>   
+          <a
+            id="create-product"
+            type="button" 
+            class="btn btn-primary" 
+            asp-area="Admin"
+            asp-controller="Product"
+            asp-action="Create">
+           Create New Product
+           </a>  
+  </div>    
+
+    <table class="table text-center" id="productTable">
+  <thead>
+    <tr>  
+      <th scope="col">Title</th> 
+      <th scope="col">ISBN</th> 
+      <th scope="col">Author</th>
+      <th scope="col">ListPrice</th>
+      <th scope="col">Price50</th>
+      <th scope="col">Price100</th>
+      <th scope="col">Description </th>
+      <th scope="col">Action</th>
+
+    </tr>
+
+    </thead>
+    
+
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.ISBN</td>
+                <td>@item.Author</td>
+                <td>@item.ListPrice</td>
+                <td>@item.Price50</td>  
+                <td>@item.Price100</td>
+                <td>@item.Description</td>     
+                <td>
+                    <a class="btn btn-primary" asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <button class="btn btn-danger delete-btn" 
+                     data-name="@item.Title"
+                     data-id="@item.Id"
+                     data-bs-toggle="modal"
+                     data-bs-target="#deleteModal"
+                     >Delete</button> 
+                </td>
+            </tr>
+        }
+    </tbody>
+
+    </table>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        Are you sure you want to delete
+        <strong id="productName"></strong>?
+      </div>
+
+      <div class="modal-footer">
+        <button type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal">
+          Cancel
+        </button>
+
+        <form method="post" id="deleteForm">
+          <button type="submit" class="btn btn-danger">
+            Delete
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+       
+       $('.delete-btn').click(function () {
+           var productId = $(this).data('id');
+           var productName = $(this).data('name');
+           $('#productName').text(productName);
+           $('#deleteForm').attr('action', '/Admin/Product/Delete/' + productId);
+       });
+       
+
+    });
+</script>
+}
+
