@@ -1,7 +1,13 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Application_1.Areas.Admin.Models;
 using Application_1.Models.Models;
 using Application_1.DataAccess.Repository.IRepository;
+using System.Collections.Generic;
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace Application_1.Areas.Admin.Controllers
 {
@@ -21,11 +27,9 @@ namespace Application_1.Areas.Admin.Controllers
             try
             {
             IEnumerable<Product> list = _unitOfWork.Product.GetAll();
-            Product product = new Product();
             productViewModel = new ProductViewModel
             {
                 Products = list,
-                Product=product
             }; 
             }
             catch(Exception e)
@@ -37,7 +41,27 @@ namespace Application_1.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            ProductViewModel productViewModel=null;
+            try
+            {
+            IEnumerable<Product> list = _unitOfWork.Product.GetAll();
+            Product product = new Product();
+            productViewModel = new ProductViewModel
+            {
+                Products = list,
+                Product=product,
+                CategoryList = _unitOfWork.Category.GetAll().Select(i=> new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }).ToList()
+            }; 
+            }
+            catch(Exception e)
+            {
+                TempData["error"] = e.Message;
+            }    
+            return View(productViewModel);
         }
 
         public IActionResult Edit(int? id)
@@ -65,11 +89,17 @@ namespace Application_1.Areas.Admin.Controllers
                     ProductViewModel model = new ProductViewModel
                     {
                     Products = _unitOfWork.Product.GetAll(),
-                    Product= new Product()
+                    Product= new Product(),
+                     CategoryList = _unitOfWork.Category.GetAll().Select(i=> new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }).ToList()
                     };
                     TempData["error"] = "Something went wrong";
                     return View(model);
                 }
+                productViewModel.Product.Category=null;
                 _unitOfWork.Product.Add(productViewModel.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
@@ -78,6 +108,7 @@ namespace Application_1.Areas.Admin.Controllers
             catch(Exception e)
             {
                 TempData["error"] = e.Message;
+                Console.WriteLine("Exception caught in Product Create Post: " + e.Message);
                 return RedirectToAction("Index");
             }
         }
