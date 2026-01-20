@@ -1,6 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 namespace Application_1.Models.Models{
 
 public class Product
@@ -44,7 +46,19 @@ public class Product
     [Required(ErrorMessage = "Price for 50-99 units is required")]
     [Range(1, 100000, ErrorMessage ="Price must be between 1 and 10,000")]
     [DisplayName("Price for 50-99 Units")]
-    public double Price100{set;get;}    
+    public double Price100{set;get;}  
+
+    [Required(ErrorMessage ="Category is required")]
+    public int CategoryId{set;get;}
+    [ForeignKey("CategoryId")]
+
+    [ValidateNever]
+    public Category Category{set;get;}  
+
+    [DisplayName("Image URL")]
+    [MaxLength(3000, ErrorMessage ="Image URL cannot be more than 3000 characters")]
+    [Required(ErrorMessage = "Image URL is required")]
+    public string ImageUrl{set;get;}
 
 
 

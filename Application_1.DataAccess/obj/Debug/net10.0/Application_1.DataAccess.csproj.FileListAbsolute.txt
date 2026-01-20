@@ -9,6 +9,7 @@
 /Users/vickykumar/Desktop/Dotnet_Application/Application_1.DataAccess/obj/Debug/net10.0/Application_1.DataAccess.AssemblyInfoInputs.cache
 /Users/vickykumar/Desktop/Dotnet_Application/Application_1.DataAccess/obj/Debug/net10.0/Application_1.DataAccess.AssemblyInfo.cs
 /Users/vickykumar/Desktop/Dotnet_Application/Application_1.DataAccess/obj/Debug/net10.0/Application_1.DataAccess.csproj.CoreCompileInputs.cache
+/Users/vickykumar/Desktop/Dotnet_Application/Application_1.DataAccess/obj/Debug/net10.0/Application_1.DataAccess.sourcelink.json
 /Users/vickykumar/Desktop/Dotnet_Application/Application_1.DataAccess/obj/Debug/net10.0/Applicat.E9B670C5.Up2Date
 /Users/vickykumar/Desktop/Dotnet_Application/Application_1.DataAccess/obj/Debug/net10.0/Application_1.DataAccess.dll
 /Users/vickykumar/Desktop/Dotnet_Application/Application_1.DataAccess/obj/Debug/net10.0/refint/Application_1.DataAccess.dll

@@ -22,7 +22,17 @@ namespace Application_1.DataAccess.Data
             modelBuilder.Entity<Product>().
                 HasIndex(p => p.Title)
                 .IsUnique();
+
+            modelBuilder.Entity<Category>()
+            .HasIndex(c => c.Name)
+            .IsUnique();
+
+            
+
         }
+
+       
+    
 
     }
 }
