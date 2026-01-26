@@ -38,7 +38,6 @@ public class ProductRepository:Repository<Product>, IProductRepository
             _db.Products.Update(productFromDb);
             _db.SaveChanges();
 
-    }
-    
+    }  
 }
 }

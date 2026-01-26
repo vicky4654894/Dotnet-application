@@ -6,6 +6,5 @@ namespace Application_1.DataAccess.Repository.IRepository
     {
 
         void Update(Category category);
-      
     }
 }

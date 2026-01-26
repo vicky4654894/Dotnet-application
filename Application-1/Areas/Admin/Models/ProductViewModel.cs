@@ -15,6 +15,14 @@ public class ProductViewModel
     [ValidateNever]
     public IEnumerable<SelectListItem> CategoryList { get; set; } = new List<SelectListItem>();
 
+    public IFormFile? ImageFile { get; set; }
+
+    public int CurrentPage{get;set;}
+
+    public int TotalPages{get;set;}
+
+    public string Search{get;set;}
+
     
 }
 }

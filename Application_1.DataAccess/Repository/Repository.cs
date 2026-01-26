@@ -17,9 +17,31 @@ namespace Application_1.DataAccess.Repository
             this.dbSet = _db.Set<T>();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(
+            Expression<Func<T, bool>>? filter = null,
+            string? includeProperties = null,
+            int? pageNumber = null,
+            int? pageSize = null)
         {
             IQueryable<T> query = dbSet;
+            if(filter != null){
+                query = query.Where(filter);
+            }
+           
+            if(!String.IsNullOrEmpty(includeProperties)){
+                foreach(var prop in includeProperties.Split(
+                    new Char[]{','},StringSplitOptions.RemoveEmptyEntries
+                ))
+                {
+                    query=query.Include(prop);
+                }
+            }
+
+            if(pageNumber.HasValue && pageSize.HasValue){
+                int skip = (pageNumber.Value-1)*pageSize.Value;
+                query = query.Skip(skip).Take(pageSize.Value);
+            }
+
             return query.ToList();
         }
 
@@ -28,10 +50,20 @@ namespace Application_1.DataAccess.Repository
         {
             dbSet.Add(entity);
         }
-        public T Get(Expression<Func<T, bool>> filter)
+
+        public T Get(Expression<Func<T, bool>> filter,string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
+            if(!String.IsNullOrEmpty(includeProperties)){
+                foreach(var prop in includeProperties.Split(
+                    new Char[]{','},StringSplitOptions.RemoveEmptyEntries
+                ))
+                {
+                    query=query.Include(prop);
+                }
+            }
+
             return query.FirstOrDefault();
         }
 
@@ -45,6 +77,18 @@ namespace Application_1.DataAccess.Repository
             dbSet.RemoveRange(entities);
         }
         
+
+
+    public int Count(Expression<Func<T,bool>> ? filter){
+        IQueryable<T> query = dbSet;
+
+        if(filter != null){
+            query = query.Where(filter);
+        }
+
+        return query.Count();
+
+    }
 
     }
 }

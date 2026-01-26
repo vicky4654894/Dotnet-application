@@ -57,7 +57,7 @@ public class Product
 
     [DisplayName("Image URL")]
     [MaxLength(3000, ErrorMessage ="Image URL cannot be more than 3000 characters")]
-    [Required(ErrorMessage = "Image URL is required")]
+    [ValidateNever]
     public string ImageUrl{set;get;}
 
 

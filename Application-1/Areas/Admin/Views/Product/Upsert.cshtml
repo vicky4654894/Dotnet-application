@@ -4,8 +4,9 @@
 
 @model ProductViewModel
 <div class="container mt-3">
-    <h2>Create New Product</h2>
-    <form asp-area="Admin" asp-action="Create" asp-controller="Product"  method="post">
+    <h2>@(Model.Product.Id == 0 ? "Create": "Update") Product</h2>
+    <form asp-area="Admin" asp-action="Upsert" asp-controller="Product" enctype="multipart/form-data"  method="post" >
+        <input type="hidden" asp-for="Product.Id" />
         <div class="mb-3">
             <label asp-for="Product.Title" class="form-label"></label>
             <input type="text" asp-for="Product.Title" class="form-control" />
@@ -49,13 +50,20 @@
             </select>
             <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
         </div>
+        
 
+       <div class="mb-3">
+        <label>Upload Image</label>
+        <input type="file" asp-for="ImageFile" class="form-control" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+        @if (!string.IsNullOrEmpty(Model.Product.ImageUrl))
+        {
         <div class="mb-3">
-            <label asp-for="Product.ImageUrl" class="form-label"></label>
-            <input type="text" asp-for="Product.ImageUrl" class="form-control" />  
-            <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+            <img src="@Model.Product.ImageUrl" width="120" />
         </div>
+        }
 
-        <button type="submit" class="btn btn-primary">Add Product</button>
+        <button type="submit" class="btn btn-primary">@(Model.Product.Id == 0? "Create": "Update") Product</button>
     </form>
 </div>

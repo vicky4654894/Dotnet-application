@@ -10,16 +10,16 @@ namespace Application_1.DataAccess.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        T Get(Expression<Func<T, bool>> filter);  
+        IEnumerable<T> GetAll(Expression<Func<T,bool>>? filter = null,string? includeProperties = null, int? pageNumber = null,
+        int? pageSize = null);
+        T Get(Expression<Func<T, bool>> filter,string? includeProperties = null);  
+
+        
         void Add(T entity);
         void Remove(T entity);
-        
-
         void RemoveRange(IEnumerable<T> entities);
 
-
-
+        int Count(Expression<Func<T,bool>>? filter = null);
 
 
     }
