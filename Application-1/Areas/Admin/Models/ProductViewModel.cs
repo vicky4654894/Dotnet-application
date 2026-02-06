@@ -20,7 +20,7 @@ public class ProductViewModel
     public int CurrentPage{get;set;}
 
     public int TotalPages{get;set;}
-
+    [ValidateNever]
     public string Search{get;set;}
 
     

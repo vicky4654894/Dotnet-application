@@ -105,9 +105,19 @@
     <nav>
 
     <ul class="pagination d-flex justify-content-end mb-3 mt-2">
+
+      <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+            <a class="page-link m-1"
+               asp-action="Index"
+               asp-route-page="@(Model.CurrentPage - 1)"
+               asp-route-search="@Model.Search">
+                ‹
+            </a>
+        </li>
+
         @for(int i=1;i<=Model.TotalPages;i++){
-          <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                <a class="page-link"
+          <li class="page-item @(i == Model.CurrentPage ? "disabled" : "")">
+                <a class="page-link m-1"
                    asp-action="Index"
                    asp-route-page="@i"
                    asp-route-search="@Model.Search">
@@ -115,6 +125,15 @@
                 </a>
             </li>
         }
+      <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+            <a class="page-link m-1"
+               asp-action="Index"
+               asp-route-page="@(Model.CurrentPage + 1)"
+               asp-route-search="@Model.Search">
+                ›
+            </a>
+        </li>
+
     </ul>
     </nav>
 

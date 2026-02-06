@@ -133,6 +133,17 @@ namespace Application_1.Areas.Admin.Controllers
                     Text = i.Name,
                     Value = i.Id.ToString()
                 }).ToList();
+            
+            foreach (var entry in ModelState)
+    {
+        string fieldName = entry.Key;
+
+        foreach (var error in entry.Value.Errors)
+        {
+            string errorMessage = error.ErrorMessage;
+            Console.WriteLine($"Field: {fieldName}, Error: {errorMessage}");
+        }
+    }
 
             TempData["error"] = "Model is not valid!";
             return View(productViewModel);

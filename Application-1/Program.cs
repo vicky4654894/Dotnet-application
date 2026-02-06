@@ -1,50 +1,51 @@
 using Application_1.DataAccess.Data;
-using Microsoft.EntityFrameworkCore;
 using Application_1.DataAccess.Repository;
 using Application_1.DataAccess.Repository.IRepository;
-using Application_1.Areas.Customer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Application_1.Models.Models;
 var builder = WebApplication.CreateBuilder(args);
 
-
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options =>
-    {
-       var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); 
-       options.UseMySql(
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    options.UseMySql(
         connectionString,
-        //autdetect the mysql version
         ServerVersion.AutoDetect(connectionString)
-       );
-    } 
-);
+    );
+});
 
-
+    builder.Services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-app.UseRouting();
 
+app.UseStaticFiles();
+
+app.UseRouting();
+app.UseAuthentication(); 
 app.UseAuthorization();
 
-app.MapStaticAssets();
-
+// --------------------
+// Routing
+// --------------------
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
-    
+    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
+);
 
+app.MapRazorPages();
 
 app.Run();

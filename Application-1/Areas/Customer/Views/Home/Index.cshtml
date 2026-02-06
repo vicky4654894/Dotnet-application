@@ -1,10 +1,48 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model IEnumerable<Product>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to .NET Application</h1>
+    <style>
+        .product-img {
+            width: 100%;        /* 100% of card width */
+            height: 100%;      /* fixed height */
+            object-fit: cover;  /* crop & center image */
+        }
+        .card-gap{
+            gap: 1%;
+        }
 
+
+
+    </style>
+
+<div class="text-center container d-flex justify-content-between align-self-center card-gap">
+   
+    @if(Model != null){
+       
+        @foreach(var item in Model){
+            <div class="card mx-auto" style="width: 25rem;">
+    
+    <img src="@item.ImageUrl"
+         class="card-img-top product-img"
+         alt="Product image" />
+
+    <div class="card-body text-center">
+        <h5 class="card-title">@item.Title</h5>
+        <p>by @item.Author</p>
+        <p class="card-text">@item.ListPrice.ToString("c")</p>
+
+        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary bg-gradient border-0 form-control">Details</a>
+    </div>
+
+</div>
+
+        }
+    
+   
+    }
+    
    
 
     @* <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@

@@ -1,0 +1,125 @@
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+@model Product
+
+<div class="container my-5">
+
+    <!-- BACK BUTTON -->
+    <div class="mb-3">
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            ← Back to Products
+        </a>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- LEFT: PRODUCT IMAGE -->
+        <div class="col-lg-5">
+            <div class="card shadow-sm">
+                <img src="@Model.ImageUrl"
+                     class="card-img-top product-detail-img"
+                     alt="@Model.Title" />
+            </div>
+        </div>
+
+        <!-- RIGHT: PRODUCT DETAILS -->
+        <div class="col-lg-7">
+
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+
+                    <!-- TITLE -->
+                    <h2 class="fw-bold mb-2">@Model.Title</h2>
+
+                    <!-- META INFO -->
+                    <div class="text-muted mb-3">
+                        <span class="me-3"><strong>Author:</strong> @Model.Author</span>
+                        <span class="me-3"><strong>ISBN:</strong> @Model.ISBN</span>
+                        <span><strong>Category:</strong> @Model.Category?.Name</span>
+                    </div>
+
+                    <hr />
+
+                    <!-- PRICE -->
+                    <h3 class="text-success fw-bold mb-3">
+                        @Model.ListPrice.ToString("c")
+                    </h3>
+
+                    <!-- DESCRIPTION -->
+                    <h6 class="fw-semibold">Description</h6>
+                    <p class="text-secondary">
+                        @Model.Description
+                    </p>
+
+                    <!-- PRICE TABLE -->
+                    <div class="mt-4">
+                        <h6 class="fw-semibold">Pricing by Quantity</h6>
+
+                        <table class="table table-sm table-bordered w-75 mt-2">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1 – 49</td>
+                                    <td>@Model.Price50.ToString("c")</td>
+                                </tr>
+                                <tr>
+                                    <td>50 – 99</td>
+                                    <td>@Model.Price100.ToString("c")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr />
+
+                    <!-- ADD TO CART -->
+                    <form asp-area="Customer"
+                          asp-controller="Cart"
+                          asp-action="AddToCart"
+                          method="post"
+                          class="mt-3">
+
+                        <input type="hidden" name="productId" value="@Model.Id" />
+
+                        <div class="row align-items-end g-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Quantity</label>
+                                <input type="number"
+                                       name="quantity"
+                                       value="1"
+                                       min="1"
+                                       class="form-control" />
+                            </div>
+
+                            <div class="col-md-8">
+                                <button type="submit"
+                                        class="btn btn-success btn-lg w-100">
+                                    🛒 Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- IMAGE STYLING -->
+<style>
+    .product-detail-img {
+        width: 100%;
+        height: 380px;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+</style>
