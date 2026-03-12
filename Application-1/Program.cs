@@ -3,8 +3,8 @@ using Application_1.DataAccess.Repository;
 using Application_1.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Application_1.Models.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
@@ -20,7 +20,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     );
 });
 
-    builder.Services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Identity/Register/Register";
+        options.AccessDeniedPath = "/Identity/Register/AccessDenied";
+    });
+
+   // builder.Services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
 
@@ -46,6 +53,6 @@ app.MapControllerRoute(
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
 );
 
-app.MapRazorPages();
+// app.MapRazorPages();
 
 app.Run();
